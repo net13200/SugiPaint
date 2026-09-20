@@ -1,13 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ff5e8a"/>
-      <stop offset="1" stop-color="#7c5cff"/>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#fef6e4"/>
+      <stop offset="1" stop-color="#e7f6f2"/>
+    </linearGradient>
+    <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0" stop-color="#b07a50"/>
+      <stop offset="1" stop-color="#7c4e30"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="110" fill="url(#g)"/>
-  <circle cx="180" cy="190" r="34" fill="#ffd93d"/>
-  <circle cx="300" cy="160" r="30" fill="#3ddc97"/>
-  <circle cx="360" cy="260" r="34" fill="#ff9d4d"/>
-  <path d="M150 340 C 200 260, 320 260, 380 200 C 400 180, 420 200, 400 220 C 340 280, 300 380, 220 400 C 170 412, 110 400, 150 340 Z" fill="#ffffff"/>
+
+  <rect width="100" height="100" rx="22" fill="url(#bgGrad)"/>
+
+  <g transform="translate(6 6) scale(0.88)">
+    <g fill="none" stroke="url(#trunkGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 34 C24 33, 36 33.5, 46 34.5"/>
+      <path d="M30 12 C29.5 32, 30 55, 30 88"/>
+      <path d="M30 42 C25 50, 20 58, 16 66"/>
+      <path d="M30 42 C35 50, 40 58, 44 66"/>
+    </g>
+    <g fill="#4fcf82">
+      <ellipse cx="66" cy="20" rx="12" ry="8" transform="rotate(-30 66 20)"/>
+      <ellipse cx="76" cy="40" rx="13" ry="8.5" transform="rotate(-30 76 40)"/>
+      <ellipse cx="66" cy="60" rx="14" ry="9" transform="rotate(-30 66 60)"/>
+    </g>
+  </g>
 </svg>

@@ -101,7 +101,12 @@ button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; 
   font-size: 1.3rem;
   color: var(--accent-2);
 }
-.brand-icon { font-size: 1.6rem; }
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+}
 
 .top-actions {
   display: flex;
