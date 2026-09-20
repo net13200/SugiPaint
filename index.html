@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>SugiPaint</title>
+<meta name="description" content="A big, bright, super simple drawing app for little artists." />
+<meta name="theme-color" content="#ff5e8a" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <header id="topbar">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">🎨</span>
+      <span class="brand-name">SugiPaint</span>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="btn-undo" aria-label="Undo" title="Undo">↩️</button>
+      <button class="icon-btn" id="btn-clear" aria-label="Clear everything" title="Clear">🧹</button>
+      <button class="icon-btn" id="btn-save" aria-label="Save my picture" title="Save">📥</button>
+      <button class="icon-btn" id="btn-sound" aria-label="Toggle sound" title="Sound">🔊</button>
+    </div>
+  </header>
+
+  <main id="canvas-wrap">
+    <canvas id="board"></canvas>
+    <div id="confetti-layer" aria-hidden="true"></div>
+  </main>
+
+  <footer id="toolbar">
+
+    <div class="row" id="tool-row">
+      <button class="tool-btn is-active" data-tool="brush" aria-label="Brush" title="Brush">🖌️</button>
+      <button class="tool-btn" data-tool="stamp" aria-label="Stickers" title="Stickers">⭐</button>
+      <button class="tool-btn" data-tool="eraser" aria-label="Eraser" title="Eraser">🧽</button>
+
+      <span class="divider" aria-hidden="true"></span>
+
+      <button class="size-btn" data-size="small" aria-label="Small brush" title="Small">
+        <span class="dot dot-s"></span>
+      </button>
+      <button class="size-btn is-active" data-size="medium" aria-label="Medium brush" title="Medium">
+        <span class="dot dot-m"></span>
+      </button>
+      <button class="size-btn" data-size="large" aria-label="Large brush" title="Large">
+        <span class="dot dot-l"></span>
+      </button>
+    </div>
+
+    <div class="row" id="color-row" aria-label="Colors">
+      <!-- filled by JS -->
+    </div>
+
+    <div class="row" id="stamp-row" aria-label="Stickers" hidden>
+      <!-- filled by JS -->
+    </div>
+
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

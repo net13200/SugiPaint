@@ -1,0 +1,13 @@
+{
+  "name": "SugiPaint",
+  "short_name": "SugiPaint",
+  "description": "A big, bright, super simple drawing app for little artists.",
+  "start_url": ".",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#fef6e4",
+  "theme_color": "#ff5e8a",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
