@@ -4,6 +4,8 @@
   --ink: #3a2e5c;
   --accent: #ff5e8a;
   --accent-2: #7c5cff;
+  --trunk: #8a5a44;
+  --leaf: #2fae64;
   --btn-size: 64px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -72,7 +74,6 @@ button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; 
   font-weight: 800;
   font-size: 1.6rem;
   letter-spacing: 0.02em;
-  color: var(--accent-2);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -81,6 +82,9 @@ button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; 
   opacity: 1;
   transform: translateY(0);
 }
+
+.word-sugi { color: var(--trunk); }
+.word-paint { color: var(--leaf); }
 
 /* ---------- Top bar ---------- */
 
@@ -99,7 +103,6 @@ button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; 
   gap: 8px;
   font-weight: 800;
   font-size: 1.3rem;
-  color: var(--accent-2);
 }
 .brand-icon {
   width: 34px;
