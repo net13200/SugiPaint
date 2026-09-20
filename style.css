@@ -131,6 +131,10 @@ button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; 
   transition: transform .12s ease;
 }
 .icon-btn:active { transform: scale(0.88); }
+.icon-btn.is-active {
+  background: var(--accent);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15), 0 0 0 3px #ffffff inset;
+}
 
 /* ---------- Canvas ---------- */
 

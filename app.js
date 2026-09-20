@@ -14,6 +14,7 @@
   const btnUndo = document.getElementById("btn-undo");
   const btnClear = document.getElementById("btn-clear");
   const btnSave = document.getElementById("btn-save");
+  const btnMirror = document.getElementById("btn-mirror");
   const btnSound = document.getElementById("btn-sound");
 
   const COLORS = [
@@ -40,6 +41,7 @@
     size: "medium",
     stamp: STAMPS[0],
     soundOn: true,
+    mirror: false,
     hue: 0,
     drawing: false,
     lastX: 0,
@@ -47,6 +49,20 @@
   };
 
   let dpr = Math.max(1, window.devicePixelRatio || 1);
+  let cssW = 0;
+  let cssH = 0;
+
+  // ---------- Mirror / symmetry drawing ----------
+
+  function mirrorTransforms() {
+    if (!state.mirror) return [(x, y) => [x, y]];
+    return [
+      (x, y) => [x, y],
+      (x, y) => [cssW - x, y],
+      (x, y) => [x, cssH - y],
+      (x, y) => [cssW - x, cssH - y],
+    ];
+  }
 
   // ---------- Canvas sizing ----------
 
@@ -54,6 +70,8 @@
     const rect = wrap.getBoundingClientRect();
     const w = Math.max(1, Math.round(rect.width));
     const h = Math.max(1, Math.round(rect.height));
+    cssW = w;
+    cssH = h;
 
     let snapshot = null;
     if (preserve && canvas.width > 0 && canvas.height > 0) {
@@ -237,35 +255,44 @@
 
   function drawDot(x, y) {
     const r = SIZES[state.size] / 2;
-    ctx.beginPath();
-    if (state.tool === "eraser") {
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalCompositeOperation = "source-over";
-    } else {
-      ctx.fillStyle = currentStrokeColor();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fill();
+    const color = state.tool === "eraser" ? null : currentStrokeColor();
+    for (const t of mirrorTransforms()) {
+      const [mx, my] = t(x, y);
+      ctx.beginPath();
+      if (state.tool === "eraser") {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.arc(mx, my, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalCompositeOperation = "source-over";
+      } else {
+        ctx.fillStyle = color;
+        ctx.arc(mx, my, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
   }
 
   function strokeSegment(x0, y0, x1, y1) {
     const r = SIZES[state.size];
+    const color = state.tool === "eraser" ? null : currentStrokeColor();
     ctx.lineWidth = r;
-    if (state.tool === "eraser") {
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.beginPath();
-      ctx.moveTo(x0, y0);
-      ctx.lineTo(x1, y1);
-      ctx.stroke();
-      ctx.globalCompositeOperation = "source-over";
-    } else {
-      ctx.strokeStyle = currentStrokeColor();
-      ctx.beginPath();
-      ctx.moveTo(x0, y0);
-      ctx.lineTo(x1, y1);
-      ctx.stroke();
+    for (const t of mirrorTransforms()) {
+      const [mx0, my0] = t(x0, y0);
+      const [mx1, my1] = t(x1, y1);
+      if (state.tool === "eraser") {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.moveTo(mx0, my0);
+        ctx.lineTo(mx1, my1);
+        ctx.stroke();
+        ctx.globalCompositeOperation = "source-over";
+      } else {
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(mx0, my0);
+        ctx.lineTo(mx1, my1);
+        ctx.stroke();
+      }
     }
   }
 
@@ -275,7 +302,10 @@
     ctx.font = `${size}px "Baloo 2", sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(state.stamp, x, y);
+    for (const t of mirrorTransforms()) {
+      const [mx, my] = t(x, y);
+      ctx.fillText(state.stamp, mx, my);
+    }
     ctx.restore();
   }
 
@@ -371,6 +401,13 @@
       ensureAudio();
       clickSound();
     }
+  });
+
+  btnMirror.addEventListener("pointerdown", () => {
+    state.mirror = !state.mirror;
+    btnMirror.classList.toggle("is-active", state.mirror);
+    ensureAudio();
+    clickSound();
   });
 
   // ---------- Autosave ----------
