@@ -203,6 +203,7 @@
     state.tool = tool;
     toolButtons.forEach((b) => b.classList.remove("is-active"));
     btn.classList.add("is-active");
+    colorRow.hidden = tool !== "brush";
     stampRow.hidden = tool !== "stamp";
     ensureAudio();
     clickSound();

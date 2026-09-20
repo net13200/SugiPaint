@@ -140,6 +140,7 @@ button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; 
   padding: 2px;
 }
 .row::-webkit-scrollbar { display: none; }
+.row[hidden] { display: none; }
 
 .divider {
   flex: 0 0 auto;
