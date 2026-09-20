@@ -16,6 +16,28 @@
 </head>
 <body>
 
+<div id="splash" role="status" aria-label="SugiPaint is loading">
+  <svg id="kanji-svg" viewBox="0 0 100 100" width="160" height="160" aria-hidden="true">
+    <defs>
+      <linearGradient id="brushGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff5e8a" />
+        <stop offset="100%" stop-color="#7c5cff" />
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#brushGradient)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path class="kanji-stroke" d="M 10 34 C 20 33, 34 33.5, 46 34.5" />
+      <path class="kanji-stroke" d="M 28 10 C 27.5 30, 28 55, 28 90" />
+      <path class="kanji-stroke" d="M 28 42 C 20 55, 10 68, 4 88" />
+      <path class="kanji-stroke" d="M 28 42 C 36 55, 44 68, 50 90" />
+      <path class="kanji-stroke" d="M 58 14 C 66 20, 72 26, 76 32" />
+      <path class="kanji-stroke" d="M 62 40 C 72 47, 80 54, 86 60" />
+      <path class="kanji-stroke" d="M 66 68 C 78 76, 88 82, 96 90" />
+    </g>
+    <circle id="brush-tip" r="4.2" fill="#ffffff" opacity="0" />
+  </svg>
+  <div id="splash-word">SugiPaint</div>
+</div>
+
 <div id="app">
 
   <header id="topbar">
@@ -68,6 +90,7 @@
 
 </div>
 
+<script src="splash.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -40,6 +40,48 @@ button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; 
   background: linear-gradient(160deg, #fef6e4 0%, #e7f6f2 100%);
 }
 
+/* ---------- Splash / loading animation ---------- */
+
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: linear-gradient(160deg, #fef6e4 0%, #e7f6f2 100%);
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+#splash.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#kanji-svg {
+  filter: drop-shadow(0 6px 14px rgba(90, 60, 130, 0.18));
+}
+#brush-tip {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.95));
+}
+
+#splash-word {
+  font-family: "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+  color: var(--accent-2);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+#splash-word.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ---------- Top bar ---------- */
 
 #topbar {
