@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#fef6e4"/>
+      <stop offset="1" stop-color="#e7f6f2"/>
+    </linearGradient>
+    <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0" stop-color="#b07a50"/>
+      <stop offset="1" stop-color="#7c4e30"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#8de89c"/>
+      <stop offset="1" stop-color="#2fae64"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100" height="100" fill="url(#bgGrad)"/>
+
+  <g transform="translate(14 17) scale(0.65)">
+    <g fill="none" stroke="url(#trunkGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 34 C24 33, 36 33.5, 46 34.5"/>
+      <path d="M30 12 C29.5 32, 30 55, 30 88"/>
+      <path d="M30 42 C25 50, 20 58, 16 66"/>
+      <path d="M30 42 C35 50, 40 58, 44 66"/>
+    </g>
+    <g fill="none" stroke="url(#leafGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M76 14 C68 20, 62 26, 58 32"/>
+      <path d="M86 40 C76 47, 68 54, 62 60"/>
+      <path d="M96 68 C84 76, 74 82, 66 90"/>
+    </g>
+  </g>
+</svg>
