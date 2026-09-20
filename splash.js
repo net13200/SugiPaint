@@ -27,7 +27,7 @@
     });
     tip.setAttribute("opacity", "0");
     word.classList.add("is-visible");
-    setTimeout(hideSplash, reduceMotion ? 200 : 450);
+    setTimeout(hideSplash, reduceMotion ? 200 : 1450);
   }
 
   function hideSplash() {
