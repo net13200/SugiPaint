@@ -16,12 +16,6 @@ A big, bright, super simple drawing app made for little artists (works great for
 - Auto-saves your drawing so it's still there if the page reloads
 - Fully responsive: works on phones, tablets, and desktop browsers
 
-## Running locally
+## Try it
 
-This is a static site with no dependencies or build step. Serve the folder with any static file server, for example:
-
-```
-python3 -m http.server 8000
-```
-
-Then open `http://localhost:8000` in a browser.
+https://net13200.github.io/SugiPaint/
