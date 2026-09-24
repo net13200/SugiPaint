@@ -8,8 +8,8 @@
   const tip = document.getElementById("brush-tip");
   const word = document.getElementById("splash-word");
 
-  const STROKE_MS = 420;
-  const GAP_MS = 90;
+  const STROKE_MS = 340;
+  const GAP_MS = 60;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let skipped = false;
