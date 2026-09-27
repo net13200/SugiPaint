@@ -1,6 +1,14 @@
 (() => {
   "use strict";
 
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {
+        /* offline support just won't be available — app still works online */
+      });
+    });
+  }
+
   const canvas = document.getElementById("board");
   const ctx = canvas.getContext("2d", { willReadFrequently: false });
   const wrap = document.getElementById("canvas-wrap");
