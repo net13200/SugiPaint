@@ -21,7 +21,7 @@
 
   const btnUndo = document.getElementById("btn-undo");
   const btnClear = document.getElementById("btn-clear");
-  const btnSave = document.getElementById("btn-save");
+  const btnRedo = document.getElementById("btn-redo");
   const btnMirror = document.getElementById("btn-mirror");
   const btnSound = document.getElementById("btn-sound");
 
@@ -114,23 +114,21 @@
     ctx.restore();
   }
 
-  // ---------- Undo stack ----------
+  // ---------- Undo / redo stacks ----------
 
   const undoStack = [];
+  const redoStack = [];
   const MAX_UNDO = 20;
 
-  function pushUndo() {
+  function snapshotNow() {
     try {
-      undoStack.push(canvas.toDataURL("image/png"));
-      if (undoStack.length > MAX_UNDO) undoStack.shift();
+      return canvas.toDataURL("image/png");
     } catch (e) {
-      /* ignore snapshot failures */
+      return null;
     }
   }
 
-  function undo() {
-    if (undoStack.length === 0) return;
-    const dataUrl = undoStack.pop();
+  function restoreSnapshot(dataUrl) {
     const img = new Image();
     img.onload = () => {
       ctx.save();
@@ -141,7 +139,37 @@
       scheduleAutosave();
     };
     img.src = dataUrl;
+  }
+
+  function pushUndo() {
+    redoStack.length = 0;
+    const snap = snapshotNow();
+    if (snap) {
+      undoStack.push(snap);
+      if (undoStack.length > MAX_UNDO) undoStack.shift();
+    }
+  }
+
+  function undo() {
+    if (undoStack.length === 0) return;
+    const snap = snapshotNow();
+    if (snap) {
+      redoStack.push(snap);
+      if (redoStack.length > MAX_UNDO) redoStack.shift();
+    }
+    restoreSnapshot(undoStack.pop());
     playTone(320, 0.08);
+  }
+
+  function redo() {
+    if (redoStack.length === 0) return;
+    const snap = snapshotNow();
+    if (snap) {
+      undoStack.push(snap);
+      if (undoStack.length > MAX_UNDO) undoStack.shift();
+    }
+    restoreSnapshot(redoStack.pop());
+    playTone(420, 0.08);
   }
 
   // ---------- Sound (WebAudio, no assets) ----------
@@ -393,13 +421,9 @@
     scheduleAutosave();
   });
 
-  btnSave.addEventListener("pointerdown", () => {
+  btnRedo.addEventListener("pointerdown", () => {
     ensureAudio();
-    const link = document.createElement("a");
-    link.download = "my-sugipaint-picture.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-    popSound();
+    redo();
   });
 
   btnSound.addEventListener("pointerdown", () => {
